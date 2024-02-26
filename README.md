@@ -1,6 +1,8 @@
 [![GitHub stars](https://img.shields.io/github/stars/vasu31dev/playwright-ts-template)](https://github.com/vasu31dev/playwright-ts-template/stargazers)
 ![Last Commit](https://img.shields.io/github/last-commit/vasu31dev/playwright-ts-template)
 ![Pull Requests](https://img.shields.io/github/issues-pr-raw/vasu31dev/playwright-ts-template)
+[![npm version](https://img.shields.io/npm/v/vasu-playwright-utils.svg)](https://www.npmjs.com/package/vasu-playwright-utils)
+[![Release Notes](https://img.shields.io/badge/Release%20Notes-📝-brightgreen)](https://github.com/vasu31dev/playwright-ts-lib/blob/main/CHANGELOG.md)
 
 ---
 
@@ -531,6 +533,10 @@ In addition to these, Playwright also recommends following certain best practice
 
 Please refer to the [FAQ documentation](docs/FAQs.md) for questions about dependencies, libraries, utilities and errors.
 
-## Contribution guide
+## Issues and Feedback
 
-Contributions are welcome! Please read the contributing guidelines first. (In progress)
+If you encounter any issues or have feedback, please [Raise an Issue](https://github.com/vasu31dev/playwright-ts-template/issues) on GitHub.
+
+## Contributions
+
+We welcome contributions! Feel free to submit a [Pull Request](https://github.com/vasu31dev/playwright-ts-template/pulls) on GitHub.
