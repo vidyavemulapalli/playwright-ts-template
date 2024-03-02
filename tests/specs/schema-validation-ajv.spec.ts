@@ -9,7 +9,7 @@ npm install typescript @types/node --save-dev */
 
 import Ajv from 'ajv';
 import userProfileSchema from 'tests/testdata/json-schema.json';
-import { test } from '@pagesetup';
+import { expect, test } from '@pagesetup';
 
 test.describe('API tests', () => {
   test('Get request Schema validation', async ({ request }) => {
@@ -22,6 +22,7 @@ test.describe('API tests', () => {
     const validate = ajvInstance.compile(userProfileSchema);
     const valid = validate(jsonResponse);
 
+    //printing the errors
     if (!valid && validate.errors) {
       console.log('Validation failed. Errors:');
       validate.errors.forEach((error, index) => {
@@ -43,6 +44,7 @@ test.describe('API tests', () => {
     } else {
       console.log('Schema validation is successful');
     }
+    expect(valid).toBeTruthy();
   });
 
   // Helper function to access nested properties using a path
