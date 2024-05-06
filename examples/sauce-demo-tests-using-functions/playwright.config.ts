@@ -1,31 +1,20 @@
-/**
- * playwright.config.ts: This module is responsible for configuring the Playwright test runner.
- * It includes settings for test execution, browser configuration, and environment variables.
- * See https://playwright.dev/docs/test-configuration for more details.
- */
-
 import { ACTION_TIMEOUT, EXPECT_TIMEOUT, NAVIGATION_TIMEOUT, TEST_TIMEOUT } from 'vasu-playwright-utils';
 import { defineConfig, devices } from '@playwright/test';
 import dotenv from 'dotenv';
 dotenv.config({ path: '.env' });
-import path from 'path';
 import os from 'os';
 
-/**
- * To run against the local environment, set the URL to your local server like 'https://localhost:9002'
- * You can override the BASE_URL by setting the URL environment variable in .env file or passing it as a command line argument.
- */
+export const LOCAL_HOST_URL = 'https://localhost:9002';
 export const BASE_URL = process.env.URL || 'https://www.saucedemo.com';
-export const STORAGE_STATE_PATH = path.join(__dirname, 'playwright/.auth');
+const startLocalHost = BASE_URL.includes('localhost');
 const customLoggerPath = require.resolve('vasu-playwright-utils/custom-logger');
-// export const EMPTY_STORAGE_STATE = path.join(__dirname, './tests/testdata/empty-storage-state.json');
 
 export default defineConfig({
   /**
    * The directory where tests are located.
    * See https://playwright.dev/docs/api/class-testconfig#testconfig-testdir
    */
-  testDir: './tests',
+  testDir: '../sauce-demo-tests-using-functions',
   /**
    * Determines whether to run tests within each spec file in parallel, in addition to running the spec files themselves in parallel.
    * See https://playwright.dev/docs/api/class-testconfig#testconfig-fullyparallel
@@ -56,8 +45,6 @@ export default defineConfig({
    * Shared settings for all the projects below.
    * See https://playwright.dev/docs/api/class-testoptions
    */
-  globalSetup: require.resolve('./test-setup/global-setup'),
-  globalTeardown: require.resolve('./test-setup/global-teardown'),
   timeout: TEST_TIMEOUT,
   expect: {
     timeout: EXPECT_TIMEOUT,
@@ -71,8 +58,7 @@ export default defineConfig({
     },
     ignoreHTTPSErrors: true,
     acceptDownloads: true,
-    // Set the testIdAttribute for locating elements in the tests with getLocatorByTestId. Default is 'data-testid'.
-    // testIdAttribute: 'qa-target',
+    testIdAttribute: 'qa-target',
     /**
      * The base URL to be used in navigation actions such as `await page.goto('/')`.
      * This allows for shorter and more readable navigation commands in the tests.
@@ -93,31 +79,13 @@ export default defineConfig({
    * See https://playwright.dev/docs/test-configuration#projects
    */
   projects: [
-    {
-      name: 'setup',
-      testMatch: '**/login-storage-setup.ts',
-      use: {
-        ...devices['Desktop Chrome'],
-        viewport: { width: 1600, height: 1000 },
-        launchOptions: {
-          args: ['--disable-web-security'],
-          slowMo: 0,
-        },
-      },
-    },
-
     /** Due to different view ports in Head and Headless, created 2 projects one for head mode and the same browser for headless. */
     {
       name: 'chromium',
-      dependencies: ['setup'],
       use: {
         viewport: null,
-        // Set the storage state here if you have only one user to login.
-        // storageState: STORAGE_STATE_LOGIN,
         launchOptions: {
           args: ['--disable-web-security', '--start-maximized'],
-          /* --auto-open-devtools-for-tabs option is used to open a test with Network tab for debugging. It can help in analyzing network requests and responses.*/
-          // args: ["--auto-open-devtools-for-tabs"],
           // channel: 'chrome',
           slowMo: 0,
           headless: false,
@@ -127,11 +95,9 @@ export default defineConfig({
 
     {
       name: 'chromiumheadless',
-      dependencies: ['setup'],
       use: {
         ...devices['Desktop Chrome'],
         viewport: { width: 1600, height: 1000 },
-        // storageState: STORAGE_STATE_LOGIN,
         launchOptions: {
           args: ['--disable-web-security'],
           // channel: 'chrome',
@@ -191,14 +157,16 @@ export default defineConfig({
    * If the tests are being run on localhost, this configuration starts a web server.
    * See https://playwright.dev/docs/test-webserver#configuring-a-web-server
    */
-  webServer: {
-    cwd: `${os.homedir()}/repos/ui`, // You can also use the relative path to the UI repo
-    command: 'npm start ui-server', // Start the UI server
-    url: BASE_URL,
-    ignoreHTTPSErrors: true,
-    timeout: 2 * 60 * 1000,
-    reuseExistingServer: true,
-    stdout: 'pipe',
-    stderr: 'pipe',
-  },
+  ...(startLocalHost && {
+    webServer: {
+      cwd: `${os.homedir()}/repos/ui`, // You can also use the realtive path to the UI repo
+      command: 'npm start ui-server', // Start the UI server
+      url: LOCAL_HOST_URL,
+      ignoreHTTPSErrors: true,
+      timeout: 2 * 60 * 1000,
+      reuseExistingServer: !process.env.CI,
+      stdout: 'pipe',
+      stderr: 'pipe',
+    },
+  }),
 });
