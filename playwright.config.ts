@@ -51,7 +51,17 @@ export default defineConfig({
    * The reporter to use. This can be set to use a different value on CI.
    * See https://playwright.dev/docs/test-reporters
    */
-  reporter: [[customLoggerPath], ['html', { open: 'never' }], ['dot']],
+  reporter: [[customLoggerPath], ['html', { open: 'never' }], ['dot'], ['line'], ['allure-playwright']],
+  // reporter: [
+  //   [
+  //     'allure-playwright',
+  //     {
+  //       detail: true,
+  //       outputFolder: 'my-allure-results',
+  //       suiteTitle: false,
+  //     },
+  //   ],
+  // ],
   /**
    * Shared settings for all the projects below.
    * See https://playwright.dev/docs/api/class-testoptions

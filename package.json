@@ -26,6 +26,7 @@
     "node": ">=18.0.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.43.1",
     "@types/node": "^20.11.24",
     "typescript": "^5.3.3",
     "vasu-playwright-utils": "^1.14.1"
@@ -48,6 +49,7 @@
     "record": "playwright codegen",
     "clear:storage": "rimraf playwright/.auth",
     "allure": "allure generate ./allure-results --clean && allure open ./allure-report",
+    "allureReport": "allure generate my-allure-results -o allure-report --clean && allure open allure-report",
     "lint": "cross-env eslint 'tests/**/*.ts' 'test-setup/**/*.ts' 'playwright.config.ts' '.eslintrc.js'",
     "lint:fix": "cross-env eslint 'tests/**/*.ts' 'test-setup/**/*.ts' 'playwright.config.ts' '.eslintrc.js' --fix",
     "format": "cross-env prettier --write 'tests/**/*.ts' 'test-setup/**/*.ts' 'playwright.config.ts' '.eslintrc.js' '**/*.json' '**/*.md' '!package-lock.json' '!dist/**/*' '!build/**/*'",

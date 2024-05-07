@@ -1,17 +1,15 @@
-name: Run Tests
+name: Playwright-allure-report
 
 on:
   push:
     branches:
-      - main
+      - allureReportsAndGitHubPages
   pull_request:
   workflow_dispatch:
 
 jobs:
-  test:
-    name: PR Check
-    runs-on:
-      labels: ubuntu-latest
+  build:
+    runs-on: ubuntu-latest 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -31,10 +29,29 @@ jobs:
       - name: Run tests
         run: npm test
 
-      - name: Upload test results
+      - name: Get Allure history
+        uses: actions/checkout@v4
         if: always()
-        uses: actions/upload-artifact@v4
+        continue-on-error: true
         with:
-          name: playwright-test-results
-          path: playwright-report
-        #   retention-days: 1
+          ref: gh-pages
+          path: gh-pages
+        
+      - name: Allure Report Action from marketplace
+        uses: simple-elf/allure-report-action@master
+        if: always()
+        id: allure-report
+        with:
+          allure_results: allure-results
+          gh_pages: gh-pages
+          allure_report: allure-report
+          allure_history: allure-history
+
+      - name: Deploy Report to Git hub pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PUBLISH_BRANCH: gh-pages
+          PUBLISH_DIR: allure-history
+
