@@ -14,10 +14,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup node
+      - name: Setup node 20
         uses: actions/setup-node@v4
         with:
-          node-version: '18.19.1'
+          node-version: '20'
 
       - name: Install Playwright Deps
         run: npx playwright install-deps chromium
@@ -47,7 +47,7 @@ jobs:
 
       - name: Deploy Report to GitHub Pages
         if: always()
-        uses: peaceiris/actions-gh-pages@v3.8.0
+        uses: JamesIves/github-pages-deploy-action
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
