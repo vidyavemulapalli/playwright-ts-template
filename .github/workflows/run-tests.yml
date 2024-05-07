@@ -47,7 +47,7 @@ jobs:
 
       - name: Deploy Report to GitHub Pages
         if: always()
-        uses: JamesIves/github-pages-deploy-action
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
