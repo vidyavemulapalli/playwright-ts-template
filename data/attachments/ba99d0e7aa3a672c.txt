@@ -1,7 +1,0 @@
-{
-  name: 'morpheus',
-  job: 'leader',
-  id: '73',
-  createdAt: '2024-05-07T16:49:01.722Z'
-}
-[ 'name', 'job', 'id', 'createdAt' ]
