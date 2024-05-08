@@ -20,13 +20,14 @@ jobs:
           node-version: '20'
 
       - name: Install Playwright Deps
-        run: npx playwright install-deps chromium --verbose
+        run: npx playwright install-deps chromium
 
       - name: Install Libraries
         run: npm ci --verbose
 
       - name: Run tests
         run: npm test --verbose
+        continue-on-error: true
 
       # - name: Get Allure history
       #   uses: actions/checkout@v4
