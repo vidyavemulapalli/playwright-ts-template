@@ -37,19 +37,19 @@ jobs:
           ref: gh-pages
           path: gh-pages
   
-      # - name: Build test report
-      #   uses: simple-elf/allure-report-action@v1.7
-      #   if: always()
-      #   with:
-      #     gh_pages: gh-pages
-      #     allure_history: allure-history
-      #     allure_results: allure-results
-
-      - name: Copy Allure History
+      - name: Build test report
+        uses: simple-elf/allure-report-action@v1.7
         if: always()
-        run: |
-          mkdir -p allure-results/history
-          cp -r gh-pages/last-history/. allure-results/history || echo "No previous history found"
+        with:
+          gh_pages: gh-pages
+          allure_history: allure-history
+          allure_results: allure-results
+
+      # - name: Copy Allure History
+      #   if: always()
+      #   run: |
+      #     mkdir -p allure-results/history
+      #     cp -r gh-pages/last-history/. allure-results/history || echo "No previous history found"
 
       # - name: Generate Allure Report
       #   run: |
