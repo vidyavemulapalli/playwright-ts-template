@@ -51,10 +51,10 @@ jobs:
           mkdir -p allure-results/history
           cp -r gh-pages/last-history/. allure-results/history || echo "No previous history found"
 
-      - name: Generate Allure Report
-        run: |
-          npm run allure:generate
-          npm run allure:open
+      # - name: Generate Allure Report
+      #   run: |
+      #     npm run allure:generate
+      #     npm run allure:open
 
       - name: Move Allure History to gh-pages
         if: always()
