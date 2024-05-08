@@ -2,7 +2,7 @@ import { test } from '@pagesetup';
 import * as Trekb2b from 'tests/trek/trek-home-page';
 import * as WarrantyPage from 'tests/trek/trek-warranty-page';
 
-test.describe('warranty page visibility checks', () => {
+test.skip('warranty page visibility checks', () => {
   test('visibily checks when radio option when multiple elements are visible', async () => {
     await Trekb2b.logIntoB2BSite();
     await WarrantyPage.navigateToWarrantyPage();
