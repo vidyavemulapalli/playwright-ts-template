@@ -97,7 +97,8 @@ Syntax:
 2.hasOwnProperty is a method called on the object: object.hasOwnProperty('property').
 The in operator is used as 'property' in object.
 
-When to Use Each
+When to Use Each:
+
 Use hasOwnProperty when you need to ensure the property exists directly on the object, not inherited. This is important in situations where you want to avoid false positives from properties provided by the object's prototype.
 
 Use the in operator when you want to check for the existence of a property and do not care whether it's an own property or inherited. This can be useful for feature detection or when working with objects where prototype inheritance is expected.**/
