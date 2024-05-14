@@ -1,0 +1,7 @@
+{
+  name: 'morpheus',
+  job: 'leader',
+  id: '896',
+  createdAt: '2024-05-14T16:29:55.006Z'
+}
+[ 'name', 'job', 'id', 'createdAt' ]
