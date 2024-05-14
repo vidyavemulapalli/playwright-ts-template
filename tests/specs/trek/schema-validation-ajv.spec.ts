@@ -48,6 +48,7 @@ test.describe('API tests', () => {
   });
 
   // Helper function to access nested properties using a path
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function getNestedPropertyValue(object: any, path: string) {
     if (!path) return undefined;
     const properties = path.split('.');
