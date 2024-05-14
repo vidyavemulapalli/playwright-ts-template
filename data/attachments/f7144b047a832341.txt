@@ -1,2 +1,0 @@
-2024-05-14T16:29:48.497Z [error]: Cookie file: /home/runner/work/playwright-ts-template/playwright-ts-template/playwright/.auth/visual_user.json doesn't exist.
-2024-05-14T16:29:48.501Z [info]: Saving visual_user Login Storage
