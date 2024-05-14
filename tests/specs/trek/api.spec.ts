@@ -12,11 +12,13 @@ test.describe('API tests', () => {
   let jsonResponse: any;
 
   test('Get request', async ({ request }) => {
+    // adding metadata in allure rpeort
     allure.description('Verify GET API response');
     allure.severity('critical');
     allure.owner('developer');
     allure.feature('API Feature');
     allure.story('JIRA-01');
+    allure.tag('API');
 
     await test.step('GET response', async () => {
       const response = await request.get('https://reqres.in/api/users?page=2');
@@ -98,6 +100,7 @@ test.describe('API tests', () => {
     allure.owner('developer');
     allure.feature('API Feature');
     allure.story('JIRA-02');
+    allure.tag('API');
 
     const response = await request.post('https://reqres.in/api/users', {
       data: {
