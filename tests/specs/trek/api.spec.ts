@@ -19,6 +19,8 @@ test.describe('API tests', () => {
     allure.feature('API Feature');
     allure.story('JIRA-01');
     allure.tag('API');
+    allure.feature('Feature:API');
+    allure.story('GET response');
 
     await test.step('GET response', async () => {
       const response = await request.get('https://reqres.in/api/users?page=2');
