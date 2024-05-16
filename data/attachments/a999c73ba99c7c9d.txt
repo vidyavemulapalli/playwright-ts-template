@@ -1,0 +1,2 @@
+2024-05-16T15:33:03.245Z [error]: Cookie file: /home/runner/work/playwright-ts-template/playwright-ts-template/playwright/.auth/standard_user.json doesn't exist.
+2024-05-16T15:33:03.247Z [info]: Saving standard_user Login Storage
