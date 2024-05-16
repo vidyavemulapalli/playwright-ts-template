@@ -127,6 +127,22 @@ test.describe('API tests', () => {
     const keys = Object.keys(parsedJson);
     console.log(keys);
   });
+
+  test('Inavlid GET request', async ({ request }) => {
+    allure.description('Verify invalid GET API response');
+    allure.severity('critical');
+    allure.owner('developer');
+    allure.feature('API Feature');
+    allure.story('JIRA-01');
+    allure.tag('API');
+    allure.feature('Feature:API');
+    allure.story('GET response');
+
+    await test.step('GET response', async () => {
+      const response = await request.get('https://reqres.in/api/users?page=2');
+      expect(response.status()).toBe(201);
+    });
+  });
 });
 
 /**Key Differences
