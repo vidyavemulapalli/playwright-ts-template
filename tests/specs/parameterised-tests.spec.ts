@@ -1,3 +1,4 @@
+/* eslint-disable require-await */
 /* eslint-disable @typescript-eslint/no-floating-promises */
 import { test } from '@fixturesetup';
 import { allure } from 'allure-playwright';
@@ -22,8 +23,11 @@ test.describe('Parameterising tests', () => {
       // adding parameters for the allure report
       allure.parameter('USERNAME', data.username);
       allure.parameter('PASSOWRD', data.password);
-      await loginPage.navigateToSauceDemoInventoryPage(); // Since we are not loading any storageState, we should see Login page
-      await loginPage.loginWithInvalidCredentials(data);
+
+      await test.step('loggin with credentials', async () => {
+        await loginPage.navigateToSauceDemoInventoryPage(); // Since we are not loading any storageState, we should see Login page
+        await loginPage.loginWithInvalidCredentials(data);
+      });
     });
   });
 });
