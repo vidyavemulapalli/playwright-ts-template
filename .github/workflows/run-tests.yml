@@ -45,13 +45,7 @@ jobs:
         with:
           gh_pages: gh-pages
           allure_history: allure-history
-          allure_results: build/allure-results
-
-      # - name: Copy Allure History
-      #   if: always()
-      #   run: |
-      #     mkdir -p allure-results/history
-      #     cp -r gh-pages/last-history/. allure-results/history || echo "No previous history found"
+          allure_results: allure-results
 
       # - name: Generate Allure Report
       #   run: |
