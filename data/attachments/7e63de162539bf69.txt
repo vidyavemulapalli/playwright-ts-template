@@ -1,1 +1,0 @@
-strict mode: "items" is 6-tuple, but minItems or maxItems/additionalItems are not specified or different at path "#/properties/data"
