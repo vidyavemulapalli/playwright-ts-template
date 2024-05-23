@@ -2,10 +2,10 @@
 name: Playwright-allure-report
 
 on:
-  # push:
-  #   branches:
-  #     - allureReportsAndGitHubPages
-  # pull_request:
+  push:
+    branches:
+      - allureReportsAndGitHubPages
+  pull_request:
   workflow_dispatch:
 
 jobs:
