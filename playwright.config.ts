@@ -17,7 +17,7 @@ import os from 'os';
  */
 export const BASE_URL = process.env.URL || 'https://www.saucedemo.com';
 export const STORAGE_STATE_PATH = path.join(__dirname, 'playwright/.auth');
-const customLoggerPath = require.resolve('vasu-playwright-utils/custom-logger');
+//const customLoggerPath = require.resolve('vasu-playwright-utils/custom-logger');
 // export const EMPTY_STORAGE_STATE = path.join(__dirname, './tests/testdata/empty-storage-state.json');
 
 export default defineConfig({
@@ -51,18 +51,18 @@ export default defineConfig({
    * The reporter to use. This can be set to use a different value on CI.
    * See https://playwright.dev/docs/test-reporters
    */
-  reporter: [[customLoggerPath], ['html', { open: 'never' }], ['dot'], ['line'], ['allure-playwright']],
-  // reporter: [
-  //   [
-  //     'allure-playwright',
-  //     {
-  //       // if it is set to TRUE, the hooks steps will also display in allure report
-  //       detail: false,
-  //       outputFolder: 'allure-results',
-  //       suiteTitle: false,
-  //     },
-  //   ],
-  // ],
+  //reporter: [[customLoggerPath], ['html', { open: 'never' }], ['dot'], ['line'], ['allure-playwright']],
+  reporter: [
+    [
+      'allure-playwright',
+      {
+        // if it is set to TRUE, the hooks steps will also display in allure report
+        detail: false,
+        outputFolder: 'allure-results',
+        suiteTitle: false,
+      },
+    ],
+  ],
   /**
    * Shared settings for all the projects below.
    * See https://playwright.dev/docs/api/class-testoptions
