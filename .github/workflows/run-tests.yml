@@ -37,26 +37,25 @@ jobs:
         with:
           ref: gh-pages
           path: gh-pages
-  
-      - name: Build test report
-        uses: simple-elf/allure-report-action@v1.7
+      - name: Move Allure History to gh-pages
         if: always()
-        continue-on-error: true
-        with:
-          gh_pages: gh-pages
-          allure_history: allure-history
-          allure_results: allure-results
+        run: |
+          mkdir -p gh-pages/last-history
+          cp -r allure-results/history/. gh-pages/last-history
+  
+      # - name: Build test report
+      #   uses: simple-elf/allure-report-action@v1.7
+      #   if: always()
+      #   continue-on-error: true
+      #   with:
+      #     gh_pages: gh-pages
+      #     allure_history: allure-history
+      #     allure_results: allure-results
 
       # - name: Generate Allure Report
       #   run: |
       #     npm run allure:generate
       #     npm run allure:open
-
-      # - name: Move Allure History to gh-pages
-      #   if: always()
-      #   run: |
-      #     mkdir -p gh-pages/last-history
-      #     cp -r allure-results/history/. gh-pages/last-history
   
       - name: Publish test report
         uses: peaceiris/actions-gh-pages@v4
